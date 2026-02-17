@@ -36,7 +36,7 @@ cd smart-expense-tracker
 cd server
 npm install
 
-node server.js
+node server.js or npm start
 
 server/config/db.js
 
