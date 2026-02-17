@@ -30,30 +30,34 @@ exports.register = async (req, res) => {
 };
 
 // 🔹 Login User
-exports.login = async (req, res) => {
-  try {
-    const { email, password } = req.body;
+// exports.login = async (req, res) => {
+//   try {
+//     const { email, password } = req.body;
 
-    // Check if user exists
-    const [userRows] = await db.query("SELECT * FROM users WHERE email = ?", [email]);
-    if (userRows.length === 0) {
-      return res.status(400).json({ message: "Invalid email or password" });
-    }
+//     // Check if user exists
+//     const [userRows] = await db.query("SELECT * FROM users WHERE email = ?", [email]);
+//     if (userRows.length === 0) {
+//       return res.status(400).json({ message: "Invalid email or password" });
+//     }
 
-    const user = userRows[0];
+//     const user = userRows[0];
 
-    // Compare password
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ message: "Invalid email or password" });
-    }
+//     // Compare password
+//     const isMatch = await bcrypt.compare(password, user.password);
+//     if (!isMatch) {
+//       return res.status(400).json({ message: "Invalid email or password" });
+//     }
 
-    // Generate JWT
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+//     // Generate JWT
+//     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
-    res.json({ message: "Login successful ✅", token });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).json({ message: "Server error ❌" });
-  }
-};
+//     res.json({ message: "Login successful ✅", token });
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).json({ message: "Server error ❌" });
+//   }
+// };
+exports.login = (req,res) => {
+    console.log("Login route hit");
+    res.json({ message: "Login successful " });
+}
